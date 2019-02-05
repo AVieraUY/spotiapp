@@ -34,6 +34,7 @@ export class ArtistComponent {
      this.loading = true;
      this._spotifyService.getTopTracks(id).subscribe(response => {
        this.topTracks = response;
+       console.log(this.topTracks);
        this.loading = false;
      });
     }

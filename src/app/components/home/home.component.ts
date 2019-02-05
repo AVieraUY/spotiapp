@@ -11,14 +11,20 @@ export class HomeComponent {
 
   newReleases: any[] = [];
   loading: boolean;
+  error: boolean;
+  errorMessage: string;
 
   constructor(private _spotifyService: SpotifyService) {
 
     this.loading = true;
+    this.error = false;
 
     this._spotifyService.getNewReleases().subscribe(response => {
       this.newReleases = response;
-    });
+    }, (errorService => {
+      this.error = true;
+      this.errorMessage = errorService.error.error.message;
+    }));
 
     this.loading = false;
    }
